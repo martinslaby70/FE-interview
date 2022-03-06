@@ -1,6 +1,7 @@
 {
   "version": "0.1.0",
   "name": "carvago-frontend-assignment",
+  "author": "Martin Slabý",
   "description": "Assignment in React.js for developers who want to join the Carvago FE team.",
   "repository": {
     "type": "git",
@@ -32,15 +33,20 @@
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "cypress": "^9.4.1",
-    "eslint": "^7.32.0",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.27.1",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-testing-library": "^4.6.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "framer-motion": "^4.1.17",
     "i18next": "^21.5.2",
     "i18next-browser-languagedetector": "^6.1.2",
+    "i18next-resources-to-backend": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet-async": "^1.1.2",
@@ -50,12 +56,6 @@
     "styled-components": "^5.3.3",
     "typescript": "^4.5.5",
     "web-vitals": "^1.1.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
