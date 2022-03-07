@@ -20,16 +20,6 @@ const theme = extendTheme({
       900: '#0065FF',
     },
   },
-  components: {
-    Button: {
-      baseStyle: () => ({
-        bg: 'unset',
-        backgroundColor: '#0065FF',
-        color: 'white',
-        borderRadius: '4px',
-      }),
-    },
-  },
 });
 
 export default theme;

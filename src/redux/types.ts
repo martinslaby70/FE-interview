@@ -20,3 +20,10 @@ export type Section = {
   title: string;
   items: Todo[];
 };
+
+export type User = {
+  createdAt: string; // iso string
+  fullName: string | null;
+};
+
+export type FilterType = 'all' | 'done' | 'todo';

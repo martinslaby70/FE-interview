@@ -3,6 +3,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import {initReactI18next} from 'react-i18next';
 
+// async loading resources instead of loading them all at once
 const importFn = async (language: string, namespace: string, callback: ReadCallback) => {
   try {
     const resources = (await import(`./resources/${language}.json`)) as ResourceKey;
