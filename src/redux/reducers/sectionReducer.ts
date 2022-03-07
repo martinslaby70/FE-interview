@@ -56,6 +56,17 @@ export const todoReducer = (state: Section[] = [], action: Actions) => {
         return section;
       });
     }
+    case ActionTypes.markAllAsDone: {
+      return state.map((section) => {
+        if (section.id === action.payload)
+          return {
+            ...section,
+            items: section.items.map((todo) => ({...todo, isDone: true})),
+          };
+
+        return section;
+      });
+    }
     case ActionTypes.clearTodos: {
       if (!action.payload.onlyDone) return [];
 
@@ -70,6 +81,13 @@ export const todoReducer = (state: Section[] = [], action: Actions) => {
     }
     case ActionTypes.removeSection: {
       return state.filter((section) => section.id !== action.payload);
+    }
+    case ActionTypes.updateSection: {
+      return state.map((section) => {
+        if (section.id === action.payload.id) return {...section, ...action.payload};
+
+        return section;
+      });
     }
 
     default:

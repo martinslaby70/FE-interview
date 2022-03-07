@@ -1,7 +1,8 @@
 export enum Priority {
-  low = 0,
-  mid = 1,
-  high = 2,
+  none = 0,
+  low = 1,
+  mid = 2,
+  high = 3,
 }
 
 export type Todo = {

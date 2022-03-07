@@ -5,11 +5,12 @@ enum ActionTypes {
   updateTodo = 'updateTodo',
   toggleTodoStatus = 'toggleTodoStatus',
   clearTodos = 'clearTodos',
+  markAllAsDone = 'markAllAsDone',
 
   // section
   addSection = 'addSection',
   removeSection = 'removeSection',
-  toggleSectionToDosStatus = 'toggleSectionToDosStatus',
+  updateSection = 'updateSection',
 
   // user
   addUserName = 'addUserName',

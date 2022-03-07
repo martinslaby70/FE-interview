@@ -6,14 +6,14 @@ import {useAppSelector} from 'redux/store';
 import AddSectionForm from './shared/AddSectionForm';
 import {NAVBAR_HEIGHT} from './shared/constants';
 import Filter from './Filters';
-import Section from './sections/Section';
+import Section from './sections';
 
 const BodyWrapper = styled.div`
   width: 100%
   display: flex;
   padding: calc(16px + ${NAVBAR_HEIGHT}px) 16px 16px 16px;
   min-height: 100vh;
-  background-color: #e5e5e5;
+  background-color: #F4F5F7;
 `;
 
 const SectionWrapper = styled.div`

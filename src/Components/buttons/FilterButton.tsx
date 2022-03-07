@@ -1,8 +1,6 @@
 import {Button, VStack} from '@chakra-ui/react';
 import {FC, useMemo, memo} from 'react';
 import {useTranslation} from 'react-i18next';
-import {invalidateFilter} from 'redux/actions/filter';
-import {useAppDispatch} from 'redux/store';
 import {FilterType} from 'redux/types';
 import {motion} from 'framer-motion';
 import styled from 'styled-components';
@@ -40,20 +38,13 @@ const FilterButton: FC<FilterButtonProps> = ({state, name}) => {
   const [filter, setFilter] = state;
 
   const isSelected = useMemo(() => filter === name, [filter, name]);
-  const dispatch = useAppDispatch();
-
-  // NOTE: currently only global filter is persisted, if we also persisted section filters, this wouldn't be so messy
-  const handleFilterChange = (newVal: FilterType) => {
-    dispatch(invalidateFilter());
-    setFilter(newVal);
-  };
 
   return (
     <VStack position="relative">
       <Button
         {...sharedButtonProps}
         colorScheme={isSelected ? 'blue' : undefined}
-        onClick={() => handleFilterChange(name)}
+        onClick={() => setFilter(name)}
       >
         {t(`section.filter.${name}`)}
       </Button>
