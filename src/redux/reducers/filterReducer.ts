@@ -1,11 +1,18 @@
 import ActionTypes from 'redux/actions/actionTypes';
-import {UserActions} from 'redux/actions';
-import {User} from '../types';
+import {FilterActions} from 'redux/actions/filter';
+import {FilterType} from '../types';
 
-export const userReducer = (state: User | null = null, action: UserActions) => {
+type Filter = {valid: boolean; filter: FilterType};
+export const filterReducer = (
+  state: Filter = {valid: false, filter: 'all'},
+  action: FilterActions
+) => {
   switch (action.type) {
-    case ActionTypes.addUserName: {
-      return action.payload;
+    case ActionTypes.filter: {
+      return {valid: true, filter: action.payload};
+    }
+    case ActionTypes.invalidateFilter: {
+      return {...state, valid: false};
     }
     default:
       return state;

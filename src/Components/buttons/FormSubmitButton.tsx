@@ -1,4 +1,5 @@
 import {Button, ButtonProps} from '@chakra-ui/react';
+import {memo} from 'react';
 import type {FieldValues, FormState} from 'react-hook-form';
 import {Text} from './utils';
 
@@ -32,4 +33,4 @@ const FormSubmitButton = <FV extends FieldValues>({
   );
 };
 
-export default FormSubmitButton;
+export default memo(FormSubmitButton);

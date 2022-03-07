@@ -25,6 +25,11 @@
     }
   },
   "section": {
-    "title": "Section title"
+    "title": "Section title",
+    "filter": {
+      "all": "All",
+      "todo": "To do",
+      "done": "Done"
+    }
   }
 }

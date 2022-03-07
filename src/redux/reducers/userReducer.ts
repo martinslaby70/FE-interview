@@ -1,10 +1,10 @@
 import ActionTypes from 'redux/actions/actionTypes';
-import {FilterActions} from 'redux/actions/filter';
-import {FilterType} from '../types';
+import {UserActions} from 'redux/actions';
+import {User} from '../types';
 
-export const filterReducer = (state: FilterType = 'all', action: FilterActions) => {
+export const userReducer = (state: User | null = null, action: UserActions) => {
   switch (action.type) {
-    case ActionTypes.filter: {
+    case ActionTypes.addUserName: {
       return action.payload;
     }
     default:

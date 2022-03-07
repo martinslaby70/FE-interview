@@ -30,9 +30,9 @@ const AddSectionButton = styled.div`
 `;
 
 const transitionProps = {
-  initial: {y: 50, opacity: 0},
+  initial: {y: 10, opacity: 0},
   animate: {y: 0, opacity: 1},
-  exit: {y: -50, opacity: 0},
+  exit: {y: -10, opacity: 0},
   transition: {type: 'just'},
 };
 

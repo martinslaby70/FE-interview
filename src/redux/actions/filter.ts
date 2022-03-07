@@ -6,9 +6,17 @@ export interface changeFilterAction {
   payload: FilterType;
 }
 
+export interface invalidateGlobalFilter {
+  type: ActionTypes.invalidateFilter;
+}
+
 export const changeFilter = (newFilter: FilterType): changeFilterAction => ({
   type: ActionTypes.filter,
   payload: newFilter,
 });
 
-export type FilterActions = changeFilterAction;
+export const invalidateFilter = (): invalidateGlobalFilter => ({
+  type: ActionTypes.invalidateFilter,
+});
+
+export type FilterActions = changeFilterAction | invalidateGlobalFilter;

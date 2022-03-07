@@ -63,12 +63,12 @@ const Filter = () => {
       {
         title: t('buttons.settings.clearAll'),
         icon: <HamburgerIcon w="3" h="3" mr="15px" />,
-        onClick: () => handleClearTasks(true),
+        onClick: () => handleClearTasks(false),
       },
       {
         title: t('buttons.settings.clearDone'),
         icon: <CheckIcon w="3" h="3" mr="15px" />,
-        onClick: () => handleClearTasks(false),
+        onClick: () => handleClearTasks(true),
       },
     ],
     [handleClearTasks, t]

@@ -21,7 +21,7 @@ const FilterMenu: FC<MenuType> = ({icon, items}) => (
     </MenuButton>
     <MenuList>
       {items.map((item) => (
-        <MenuItem py="10px" key={uniqueId()}>
+        <MenuItem py="10px" key={uniqueId()} onClick={item.onClick}>
           {item.icon}
           <Text fontSize="14px" fontWeight={400}>
             {item.title}

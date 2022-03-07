@@ -1,5 +1,5 @@
 import {Button, ButtonProps} from '@chakra-ui/react';
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import {useTranslation} from 'react-i18next';
 import styled from 'styled-components';
 import {Text} from './utils';
@@ -18,4 +18,4 @@ const CancelButton: FC<ButtonProps> = (buttonProps) => {
   );
 };
 
-export default CancelButton;
+export default memo(CancelButton);

@@ -16,6 +16,7 @@ enum ActionTypes {
 
   // filter
   filter = 'filter',
+  invalidateFilter = 'invalidateFilter',
 }
 
 export default ActionTypes;

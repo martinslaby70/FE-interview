@@ -57,7 +57,7 @@ export const todoReducer = (state: Section[] = [], action: Actions) => {
       });
     }
     case ActionTypes.clearTodos: {
-      if (!action.payload.onlyDone) return state.map((section) => ({...section, items: []}));
+      if (!action.payload.onlyDone) return [];
 
       return state.map((section) => ({
         ...section,
