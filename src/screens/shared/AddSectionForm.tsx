@@ -55,7 +55,7 @@ const AddSectionForm = () => {
   }, [reset, showButton]);
 
   return (
-    <Box w={SECTION_WIDTH}>
+    <Box w={SECTION_WIDTH} mt="16px">
       <AnimatePresence key="addSectionForm" exitBeforeEnter initial={false}>
         {showButton ? (
           <motion.div {...transitionProps} key="button">

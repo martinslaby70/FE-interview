@@ -14,7 +14,6 @@ const Divider = styled.div`
   background-color: #dfe1e6;
   width: 100%;
   height: 1px;
-  margin-bottom: 15px;
   margin-top: 5px;
 `;
 

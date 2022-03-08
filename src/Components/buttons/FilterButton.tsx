@@ -48,7 +48,14 @@ const FilterButton: FC<FilterButtonProps> = ({state, name}) => {
       >
         {t(`section.filter.${name}`)}
       </Button>
-      {isSelected && <SharedLayout initial={false} transition={spring} layoutId="underline" />}
+      {isSelected && (
+        <SharedLayout
+          initial={false}
+          transition={spring}
+          layoutId="underline"
+          key="filterUnderline"
+        />
+      )}
     </VStack>
   );
 };

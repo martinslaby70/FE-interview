@@ -20,6 +20,19 @@ const theme = extendTheme({
       900: '#0065FF',
     },
   },
+  components: {
+    Checkbox: {
+      baseStyle: {
+        control: {
+          borderColor: '#6B778C',
+          _checked: {
+            bg: '#0065FF',
+            borderColor: '#0065FF',
+          },
+        },
+      },
+    },
+  },
 });
 
 export default theme;

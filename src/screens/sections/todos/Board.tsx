@@ -15,13 +15,13 @@ import {List} from 'react-virtualized';
 
 import {updateSection} from 'redux/actions';
 import {useAppDispatch} from 'redux/store';
-import {Todo} from 'redux/types';
+import {FilterType, Todo} from 'redux/types';
 import {SECTION_WIDTH} from 'screens/shared/constants';
 import {CSSProperties} from 'styled-components';
 import TodoRow from './Todo';
 import {MAX_ROWS, reorder, ROW_GAP, ROW_HEIGHT} from './utils';
 
-type BoardProps = {items: Todo[]; sectionId: string};
+type BoardProps = {items: Todo[]; sectionId: string; filter: FilterType};
 
 type RowProps = {
   index: number;
@@ -29,12 +29,12 @@ type RowProps = {
 };
 
 const getRowRender =
-  (quotes: Todo[]) =>
+  (ToDos: Todo[], isDragDisabled: boolean) =>
   ({index, style}: RowProps) => {
-    const todo: Todo = quotes[index];
+    const todo: Todo = ToDos[index];
 
     return (
-      <Draggable draggableId={todo.id} index={index} key={todo.id}>
+      <Draggable draggableId={todo.id} index={index} key={todo.id} isDragDisabled={isDragDisabled}>
         {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
           <TodoRow
             provided={provided}
@@ -48,7 +48,7 @@ const getRowRender =
     );
   };
 
-const Board: FC<BoardProps> = ({items, sectionId}) => {
+const Board: FC<BoardProps> = ({items, sectionId, filter}) => {
   const dispatch = useAppDispatch();
 
   const onDragEnd = (result: DropResult) => {
@@ -63,6 +63,8 @@ const Board: FC<BoardProps> = ({items, sectionId}) => {
     () => (items.length >= MAX_ROWS ? MAX_ROWS : items.length),
     [items.length]
   );
+
+  const disableDnD = useMemo(() => filter !== 'all', [filter]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -101,7 +103,7 @@ const Board: FC<BoardProps> = ({items, sectionId}) => {
                 }
               }
             }}
-            rowRenderer={getRowRender(items)}
+            rowRenderer={getRowRender(items, disableDnD)}
           />
         )}
       </Droppable>
