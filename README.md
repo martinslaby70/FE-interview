@@ -2,6 +2,11 @@
 
 - Using redux is overkill... this project would be much better of with react `useContext` hook or `react-recoil` as stateManagement.
 - Using form managment packages in this small project also isnt much benefitial.
+- Figma doesn't make sense in some scenarios
+  - I should be displaying preview of a task description, but when opening `Edit task` modal, it displays as a title/task-name ?
+  - Preview of `Edit section modal` ?
+  - it would be cool to give the developer icon source + use only one icon source.
+  - we were said to use chakra, yet the modal looks way to similar to boostrap modal
 
 ### known issues
 
