@@ -41,17 +41,17 @@ const FilterButton: FC<FilterButtonProps> = ({state, name, id}) => {
   const isSelected = useMemo(() => filter === name, [filter, name]);
 
   return (
-    <VStack position="relative">
-      <Button
-        {...sharedButtonProps}
-        colorScheme={isSelected ? 'blue' : undefined}
-        onClick={() => setFilter(name)}
-      >
-        {t(`section.filter.${name}`)}
-      </Button>
-      {isSelected && (
-        <SharedLayout initial={false} transition={spring} layoutId={id} key="filterUnderline" />
-      )}
+    <VStack position="relative" h="40px" maxHeight="40px">
+      <motion.div layout>
+        <Button
+          {...sharedButtonProps}
+          colorScheme={isSelected ? 'blue' : undefined}
+          onClick={() => setFilter(name)}
+        >
+          {t(`section.filter.${name}`)}
+        </Button>
+      </motion.div>
+      {isSelected && <SharedLayout initial={false} transition={spring} layoutId="underLine" />}
     </VStack>
   );
 };

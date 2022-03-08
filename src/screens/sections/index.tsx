@@ -87,7 +87,6 @@ const Section: FC<SectionType> = (section) => {
       transition={{type: 'spring', bounce: 0}}
       initial={false}
       layout
-      layoutId="animatedHeight"
       key="AnimatedHeight"
     >
       <motion.div layout>
@@ -97,18 +96,17 @@ const Section: FC<SectionType> = (section) => {
           </Text>
           <CustomizedMenu icon={SubMenuIcon} background="white" items={sectionOptionItems} />
         </HStack>
-
-        <HStack justifyContent="flex-start">
-          {section.items.length >= 1 && (
-            <AnimateSharedLayout>
-              <FilterButton name="all" state={[filter, setFilter]} id={section.id} />
-              <FilterButton name="todo" state={[filter, setFilter]} id={section.id} />
-              <FilterButton name="done" state={[filter, setFilter]} id={section.id} />
-            </AnimateSharedLayout>
-          )}
-        </HStack>
       </motion.div>
 
+      {section.items.length >= 1 && (
+        <HStack justifyContent="flex-start">
+          <AnimateSharedLayout key={section.id}>
+            <FilterButton name="all" state={[filter, setFilter]} id={section.id} />
+            <FilterButton name="todo" state={[filter, setFilter]} id={section.id} />
+            <FilterButton name="done" state={[filter, setFilter]} id={section.id} />
+          </AnimateSharedLayout>
+        </HStack>
+      )}
       <Board items={FilteredItems} sectionId={section.id} filter={filter} />
 
       <AddTodoForm sectionId={section.id} />

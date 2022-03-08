@@ -56,34 +56,36 @@ const AddSectionForm = () => {
 
   return (
     <Box w={SECTION_WIDTH} mt="16px">
-      <AnimatePresence key="addSectionForm" exitBeforeEnter initial={false}>
-        {showButton ? (
-          <motion.div {...transitionProps} key="button">
-            <AddSectionButton onClick={() => setShowButton(false)}>
-              <AddIcon w="3" h="3" mr="8px" />
-              <Text fontSize="14px" fontWeight={400}>
-                {t('buttons.addSection')}
-              </Text>
-            </AddSectionButton>
-          </motion.div>
-        ) : (
-          <motion.div {...transitionProps} key="form">
-            <InputList {...methods}>
-              <FormInput name="title" variant="text" title={t('section.title')} />
-              <HStack direction="row-reverse" w="100%" justify="flex-end">
-                <CancelButton onClick={() => setShowButton(true)}>
-                  {t('buttons.cancel')}
-                </CancelButton>
-                <FormSubmitButton
-                  title={t('buttons.save')}
-                  formState={formState}
-                  onClick={handleSubmit(onSubmit)}
-                />
-              </HStack>
-            </InputList>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div layout>
+        <AnimatePresence key="addSectionForm" exitBeforeEnter initial={false}>
+          {showButton ? (
+            <motion.div {...transitionProps} key="button">
+              <AddSectionButton onClick={() => setShowButton(false)}>
+                <AddIcon w="3" h="3" mr="8px" />
+                <Text fontSize="14px" fontWeight={400}>
+                  {t('buttons.addSection')}
+                </Text>
+              </AddSectionButton>
+            </motion.div>
+          ) : (
+            <motion.div {...transitionProps} key="form">
+              <InputList {...methods}>
+                <FormInput name="title" variant="text" title={t('section.title')} />
+                <HStack direction="row-reverse" w="100%" justify="flex-end">
+                  <CancelButton onClick={() => setShowButton(true)}>
+                    {t('buttons.cancel')}
+                  </CancelButton>
+                  <FormSubmitButton
+                    title={t('buttons.save')}
+                    formState={formState}
+                    onClick={handleSubmit(onSubmit)}
+                  />
+                </HStack>
+              </InputList>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </Box>
   );
 };

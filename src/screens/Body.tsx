@@ -42,19 +42,21 @@ const Sections = () => {
         {!user ? (
           <motion.div {...transitionProps} key="emptyScreen" />
         ) : (
-          <motion.div {...transitionProps} key="Sections">
+          <>
             <Filter />
-            <Masonry
-              breakpointCols={breakpointColumnsObj}
-              className="my-masonry-grid"
-              columnClassName="my-masonry-grid_column"
-            >
-              {sections.map((item, i) => (
-                <Section {...item} key={`section-${i.toFixed()}`} />
-              ))}
-              <AddSectionForm />
-            </Masonry>
-          </motion.div>
+            <motion.div layout key="Sections">
+              <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+              >
+                {sections.map((item, i) => (
+                  <Section {...item} key={`section-${i.toFixed()}`} />
+                ))}
+                <AddSectionForm />
+              </Masonry>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </BodyWrapper>

@@ -82,9 +82,9 @@ const TodoRow: FC<TodoProps> = ({todo, isDragging, style, index, provided}) => {
     >
       <TodoBox priority={todo.priority} dragging={isDragging}>
         <PriorityBorder priority={todo.priority} />
-        <Checkbox mx="8px" defaultChecked={todo.isDone} onChange={handleToggle} iconColor="white" />
+        <Checkbox mx="8px" isChecked={todo.isDone} onChange={handleToggle} iconColor="white" />
         <Text {...provided.dragHandleProps} isTruncated flexGrow="1" py="18px">
-          {todo.id}
+          {todo.title}
         </Text>
         <Box pl="26px" pr="18px" justifyContent="flex-end" display="flex">
           <CustomizedMenu
