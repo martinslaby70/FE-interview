@@ -32,7 +32,6 @@ const AddTodoForm: FC<AddTodoFormProps> = ({sectionId}) => {
         title,
         author: user.fullName,
         isDone: false,
-        createdAt: DateTime.now().toISO(),
         sectionId,
         priority: Priority.none,
         description: '',

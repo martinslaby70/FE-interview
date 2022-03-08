@@ -26,6 +26,9 @@
   },
   "section": {
     "title": "Section title",
+    "editSection": "Edit section",
+    "createdBy": "Created by",
+    "createAt": "Created date",
     "filter": {
       "all": "All",
       "todo": "To do",

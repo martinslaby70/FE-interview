@@ -19,6 +19,7 @@ export type Todo = {
 export type Section = {
   id: string;
   title: string;
+  createdAt: string; // iso string
   items: Todo[];
 };
 

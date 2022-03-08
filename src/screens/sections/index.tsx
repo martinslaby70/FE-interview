@@ -1,4 +1,4 @@
-import {Text, HStack} from '@chakra-ui/react';
+import {Text, HStack, useDisclosure} from '@chakra-ui/react';
 import {CheckIcon, DeleteIcon, EditIcon} from '@chakra-ui/icons';
 import {FC, useCallback, useEffect, useMemo, useState} from 'react';
 import styled from 'styled-components';
@@ -17,6 +17,7 @@ import {invalidateFilter} from 'redux/actions/filter';
 import AddTodoForm from './AddTodoForm';
 import Board from './todos/Board';
 import {SubMenuIcon} from './todos/Todo';
+import EditSectionModal from './EditSectionModal';
 
 const SectionBox = styled(motion.div)`
   width: ${SECTION_WIDTH}px;
@@ -32,6 +33,8 @@ const Section: FC<SectionType> = (section) => {
   const {t} = useTranslation();
   const globalFilter = useAppSelector((state) => state.filterReducer);
   const [filter, setFilter] = useState<FilterType>('all');
+
+  const {isOpen, onToggle} = useDisclosure();
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -50,7 +53,7 @@ const Section: FC<SectionType> = (section) => {
     {
       icon: <EditIcon w="3" h="3" mr="15px" />,
       title: t('section.actions.edit'),
-      onClick: () => {},
+      onClick: onToggle,
     },
     {
       icon: <DeleteIcon color="priority.high" w="3" h="3" mr="15px" />,
@@ -101,15 +104,17 @@ const Section: FC<SectionType> = (section) => {
       {section.items.length >= 1 && (
         <HStack justifyContent="flex-start">
           <AnimateSharedLayout key={section.id}>
-            <FilterButton name="all" state={[filter, setFilter]} id={section.id} />
-            <FilterButton name="todo" state={[filter, setFilter]} id={section.id} />
-            <FilterButton name="done" state={[filter, setFilter]} id={section.id} />
+            <FilterButton name="all" state={[filter, setFilter]} />
+            <FilterButton name="todo" state={[filter, setFilter]} />
+            <FilterButton name="done" state={[filter, setFilter]} />
           </AnimateSharedLayout>
         </HStack>
       )}
       <Board items={FilteredItems} sectionId={section.id} filter={filter} />
 
       <AddTodoForm sectionId={section.id} />
+
+      <EditSectionModal isOpen={isOpen} toggle={onToggle} section={section} />
     </SectionBox>
   );
 };

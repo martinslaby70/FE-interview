@@ -1,4 +1,5 @@
 import {uniqueId} from 'lodash';
+import {DateTime} from 'luxon';
 import ActionTypes from 'redux/actions/actionTypes';
 import {Actions, Section} from '../actions';
 
@@ -13,7 +14,13 @@ export const todoReducer = (state: Section[] = [], action: Actions) => {
     case ActionTypes.addTodo: {
       return state.map((section) => {
         if (section.id === action.payload.sectionId)
-          return {...section, items: [...section.items, {...action.payload, id: uniqueId()}]};
+          return {
+            ...section,
+            items: [
+              ...section.items,
+              {...action.payload, id: uniqueId(), createdAt: DateTime.now().toISO()},
+            ],
+          };
 
         return section;
       });
@@ -76,7 +83,11 @@ export const todoReducer = (state: Section[] = [], action: Actions) => {
       }));
     }
     case ActionTypes.addSection: {
-      const newSection: Section = {id: uniqueId(), ...action.payload};
+      const newSection: Section = {
+        id: uniqueId(),
+        ...action.payload,
+        createdAt: DateTime.now().toISO(),
+      };
       return [...state, newSection];
     }
     case ActionTypes.removeSection: {

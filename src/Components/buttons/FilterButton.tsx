@@ -8,7 +8,6 @@ import styled from 'styled-components';
 type FilterButtonProps = {
   state: [FilterType, React.Dispatch<React.SetStateAction<FilterType>>];
   name: FilterType;
-  id: string;
 };
 
 const SharedLayout = styled(motion.div)`
@@ -34,14 +33,14 @@ const spring = {
   damping: 30,
 };
 
-const FilterButton: FC<FilterButtonProps> = ({state, name, id}) => {
+const FilterButton: FC<FilterButtonProps> = ({state, name}) => {
   const {t} = useTranslation();
   const [filter, setFilter] = state;
 
   const isSelected = useMemo(() => filter === name, [filter, name]);
 
   return (
-    <VStack position="relative" h="40px" maxHeight="40px">
+    <VStack position="relative" h="40px" maxHeight="40px" backgroundColor="white">
       <motion.div layout>
         <Button
           {...sharedButtonProps}
