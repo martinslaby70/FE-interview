@@ -18,6 +18,10 @@ enum ActionTypes {
   // filter
   filter = 'filter',
   invalidateFilter = 'invalidateFilter',
+
+  // popover
+  openPopover = 'openPopover',
+  closePopover = 'closePopover',
 }
 
 export default ActionTypes;

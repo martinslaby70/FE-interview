@@ -8,6 +8,7 @@ import styled from 'styled-components';
 type FilterButtonProps = {
   state: [FilterType, React.Dispatch<React.SetStateAction<FilterType>>];
   name: FilterType;
+  id: string;
 };
 
 const SharedLayout = styled(motion.div)`
@@ -33,7 +34,7 @@ const spring = {
   damping: 30,
 };
 
-const FilterButton: FC<FilterButtonProps> = ({state, name}) => {
+const FilterButton: FC<FilterButtonProps> = ({state, name, id}) => {
   const {t} = useTranslation();
   const [filter, setFilter] = state;
 
@@ -49,12 +50,7 @@ const FilterButton: FC<FilterButtonProps> = ({state, name}) => {
         {t(`section.filter.${name}`)}
       </Button>
       {isSelected && (
-        <SharedLayout
-          initial={false}
-          transition={spring}
-          layoutId="underline"
-          key="filterUnderline"
-        />
+        <SharedLayout initial={false} transition={spring} layoutId={id} key="filterUnderline" />
       )}
     </VStack>
   );

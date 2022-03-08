@@ -1,4 +1,4 @@
-import {FC, useMemo} from 'react';
+import {FC, useCallback, useMemo} from 'react';
 import {
   DragDropContext,
   Droppable,
@@ -11,10 +11,10 @@ import {
 } from 'react-beautiful-dnd';
 import ReactDOM from 'react-dom';
 
-import {List} from 'react-virtualized';
+import {List, Index} from 'react-virtualized';
 
 import {updateSection} from 'redux/actions';
-import {useAppDispatch} from 'redux/store';
+import {useAppDispatch, useAppSelector} from 'redux/store';
 import {FilterType, Todo} from 'redux/types';
 import {SECTION_WIDTH} from 'screens/shared/constants';
 import {CSSProperties} from 'styled-components';
@@ -50,6 +50,7 @@ const getRowRender =
 
 const Board: FC<BoardProps> = ({items, sectionId, filter}) => {
   const dispatch = useAppDispatch();
+  const popover = useAppSelector((state) => state.popoverReducer);
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination || result.source.index === result.destination.index) return;
@@ -59,12 +60,41 @@ const Board: FC<BoardProps> = ({items, sectionId, filter}) => {
     dispatch(updateSection({id: sectionId, items: reorderedItem}));
   };
 
-  const height = useMemo(
+  const listHeight = useMemo(
     () => (items.length >= MAX_ROWS ? MAX_ROWS : items.length),
     [items.length]
   );
 
+  // TODO: come up with the solution on how the list should be reordered if one of the filters is selected
   const disableDnD = useMemo(() => filter !== 'all', [filter]);
+
+  // HACK: this is not a good solution, currently iam saving popover status inside redux state, and recalculating height
+  // on every opening witch is bad on performance. This hacky solution solves issue with displaying popovers inside virtualized lists
+  // there should be a better way to do this, but thats way over my time-budget.
+
+  const getRowHeight = useCallback(
+    ({index}: Index) => {
+      let defaultHeight = ROW_HEIGHT + ROW_GAP;
+
+      // type definement
+      if (!popover) return defaultHeight;
+
+      if (items[index].id === popover.todoId && items.length <= 2)
+        defaultHeight += popover.popoverHeight;
+
+      return defaultHeight;
+    },
+    [items, popover]
+  );
+
+  const totalHeight = useMemo(() => {
+    let defaultHeight = (ROW_HEIGHT + ROW_GAP) * listHeight;
+
+    if (items.length <= 2 && sectionId === popover?.sectionId)
+      defaultHeight += popover.popoverHeight;
+
+    return defaultHeight;
+  }, [items.length, listHeight, popover, sectionId]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -87,9 +117,9 @@ const Board: FC<BoardProps> = ({items, sectionId, filter}) => {
       >
         {(droppableProvided: DroppableProvided) => (
           <List
-            height={(ROW_HEIGHT + ROW_GAP) * height}
+            height={totalHeight}
             rowCount={items.length}
-            rowHeight={ROW_HEIGHT + ROW_GAP}
+            rowHeight={popover ? getRowHeight : ROW_HEIGHT + ROW_GAP}
             width={SECTION_WIDTH}
             autoWidth
             style={{marginTop: '10px'}}

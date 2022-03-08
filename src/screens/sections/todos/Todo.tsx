@@ -1,8 +1,10 @@
+import {DeleteIcon, EditIcon} from '@chakra-ui/icons';
 import {Box, Checkbox, Text} from '@chakra-ui/react';
+import CustomizedMenu, {MenuItemType} from 'Components/Menu';
 import {FC, memo} from 'react';
 import {DraggableProvided} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
-import {toggleTodoStatus} from 'redux/actions';
+import {removeToDo, toggleTodoStatus} from 'redux/actions';
 import {useAppDispatch} from 'redux/store';
 import {Priority, Todo} from 'redux/types';
 import styled, {CSSProperties} from 'styled-components';
@@ -50,9 +52,24 @@ const TodoRow: FC<TodoProps> = ({todo, isDragging, style, index, provided}) => {
   const {t} = useTranslation();
   const dispatch = useAppDispatch();
 
+  const {id, sectionId} = todo;
+
   const handleToggle = () => {
-    dispatch(toggleTodoStatus({id: todo.id, sectionId: todo.sectionId}));
+    dispatch(toggleTodoStatus({id, sectionId}));
   };
+
+  const sectionOptionItems: MenuItemType[] = [
+    {
+      icon: <DeleteIcon color="priority.high" w="3" h="3" mr="15px" />,
+      title: t('todo.delete'),
+      onClick: () => dispatch(removeToDo({id, sectionId})),
+    },
+    {
+      icon: <EditIcon w="3" h="3" mr="15px" />,
+      title: t('todo.edit'),
+      onClick: () => {},
+    },
+  ];
 
   return (
     <TodoBoxWrapper
@@ -67,10 +84,15 @@ const TodoRow: FC<TodoProps> = ({todo, isDragging, style, index, provided}) => {
         <PriorityBorder priority={todo.priority} />
         <Checkbox mx="8px" defaultChecked={todo.isDone} onChange={handleToggle} iconColor="white" />
         <Text {...provided.dragHandleProps} isTruncated flexGrow="1" py="18px">
-          {todo.title}
+          {todo.id}
         </Text>
         <Box pl="26px" pr="18px" justifyContent="flex-end" display="flex">
-          {SubMenuIcon}
+          <CustomizedMenu
+            icon={SubMenuIcon}
+            background="white"
+            items={sectionOptionItems}
+            todo={{todoId: todo.id, sectionId: todo.sectionId}}
+          />
         </Box>
       </TodoBox>
     </TodoBoxWrapper>

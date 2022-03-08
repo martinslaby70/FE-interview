@@ -19,11 +19,11 @@ export interface removeSectionAction {
   payload: string;
 }
 
-type todoId = Pick<Todo, 'id' | 'sectionId'>;
+type TodoIdentification = Pick<Todo, 'id' | 'sectionId'>;
 
 export interface RemoveTodoAction {
   type: ActionTypes.removeTodo;
-  payload: todoId;
+  payload: TodoIdentification;
 }
 
 type updateTodoPayload = {id: string} & Partial<TodoPayload>;
@@ -40,7 +40,7 @@ export interface clearTodosAction {
 
 export interface toggleTodoStatusAction {
   type: ActionTypes.toggleTodoStatus;
-  payload: todoId;
+  payload: TodoIdentification;
 }
 
 export interface updateSectionAction {
@@ -58,7 +58,7 @@ export const markAllTodosAsDone = (sectionId: string): markAllTodosAsDoneAction 
   payload: sectionId,
 });
 
-export const removeToDos = (id: todoId): RemoveTodoAction => ({
+export const removeToDo = (id: TodoIdentification): RemoveTodoAction => ({
   type: ActionTypes.removeTodo,
   payload: id,
 });
@@ -72,7 +72,7 @@ export const updateTodo = (partialTodo: updateTodoPayload): updateTodoAction => 
   payload: partialTodo,
 });
 
-export const toggleTodoStatus = (todo: todoId): toggleTodoStatusAction => ({
+export const toggleTodoStatus = (todo: TodoIdentification): toggleTodoStatusAction => ({
   type: ActionTypes.toggleTodoStatus,
   payload: todo,
 });

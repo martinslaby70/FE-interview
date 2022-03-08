@@ -1,6 +1,6 @@
 import {CalendarIcon, CheckIcon, HamburgerIcon, SettingsIcon} from '@chakra-ui/icons';
 import {Box, HStack, Text} from '@chakra-ui/react';
-import FilterMenu, {MenuItemType} from 'Components/Menu';
+import CustomizedMenu, {MenuItemType} from 'Components/Menu';
 import {DateTime} from 'luxon';
 import {useCallback, useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -85,8 +85,8 @@ const Filter = () => {
           </Text>
         </HStack>
         <HStack>
-          <FilterMenu icon={<HamburgerIcon />} items={filterMenuItems} />
-          <FilterMenu icon={<SettingsIcon />} items={SettingsMenuItems} />
+          <CustomizedMenu icon={<HamburgerIcon />} items={filterMenuItems} />
+          <CustomizedMenu icon={<SettingsIcon />} items={SettingsMenuItems} />
         </HStack>
       </HStack>
       <Divider />

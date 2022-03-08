@@ -8,7 +8,7 @@ import {useAppSelector, useAppDispatch} from 'redux/store';
 import {FilterType, Section as SectionType, Todo} from 'redux/types';
 
 import FilterButton from 'Components/buttons/FilterButton';
-import FilterMenu, {MenuItemType} from 'Components/Menu';
+import CustomizedMenu, {MenuItemType} from 'Components/Menu';
 
 import {SECTION_WIDTH} from 'screens/shared/constants';
 import {markAllTodosAsDone, removeSection} from 'redux/actions';
@@ -53,10 +53,10 @@ const Section: FC<SectionType> = (section) => {
       onClick: () => {},
     },
     {
-      icon: <DeleteIcon color="red" w="3" h="3" mr="15px" />,
+      icon: <DeleteIcon color="priority.high" w="3" h="3" mr="15px" />,
       title: t('section.actions.delete'),
       onClick: () => dispatch(removeSection(section.id)),
-      textColor: 'red',
+      textColor: 'priority.high',
     },
   ];
 
@@ -95,15 +95,15 @@ const Section: FC<SectionType> = (section) => {
           <Text fontWeight={500} fontSize="16px">
             {section.title}
           </Text>
-          <FilterMenu icon={SubMenuIcon} background="white" items={sectionOptionItems} />
+          <CustomizedMenu icon={SubMenuIcon} background="white" items={sectionOptionItems} />
         </HStack>
 
         <HStack justifyContent="flex-start">
           {section.items.length >= 1 && (
             <AnimateSharedLayout>
-              <FilterButton name="all" state={[filter, setFilter]} />
-              <FilterButton name="todo" state={[filter, setFilter]} />
-              <FilterButton name="done" state={[filter, setFilter]} />
+              <FilterButton name="all" state={[filter, setFilter]} id={section.id} />
+              <FilterButton name="todo" state={[filter, setFilter]} id={section.id} />
+              <FilterButton name="done" state={[filter, setFilter]} id={section.id} />
             </AnimateSharedLayout>
           )}
         </HStack>

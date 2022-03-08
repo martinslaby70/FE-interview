@@ -38,6 +38,8 @@
     }
   },
   "todo": {
-    "addTodo": "Add new task"
+    "addTodo": "Add new task",
+    "delete": "Delete",
+    "edit": "Edit task"
   }
 }

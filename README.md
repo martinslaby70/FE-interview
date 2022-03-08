@@ -1,3 +1,23 @@
+# DEVELOPER NOTES
+
+- Using redux is overkill... this project would be much better of with react `useContext` hook or `react-recoil` as stateManagement.
+- Using form managment packages in this small project also isnt much benefitial.
+
+### known issues
+
+- displaying popover inside react-vitualized list.
+  - this actually coused many related performance issues, since we cannot just give it a higher `z-index` or disable `overlow: hidden` on the list. so i decided to gice the popover space inside the list instead
+    - recalculating rowHeight and listHeight on every popover closing/oppening action.
+    - maually updating popover state
+  - sometimes it still overlows a bit
+- framermotion animattions
+  - mainly, the animations can be way better organized, during section height animation, it can hide the `addSection` button, witch changes position instantly.
+  - overall i could spend more time on synchronizing those transition etc. But as i said... its time consuming and this project should be ment to show-off my skills, not for me to waste hours.
+
+---
+
+---
+
 # Quick Overview
 
 > This repository is built on [Create React App](https://github.com/facebook/create-react-app) with TypeScript configuration

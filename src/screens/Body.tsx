@@ -49,8 +49,8 @@ const Sections = () => {
               className="my-masonry-grid"
               columnClassName="my-masonry-grid_column"
             >
-              {sections.map((item) => (
-                <Section {...item} />
+              {sections.map((item, i) => (
+                <Section {...item} key={`section-${i.toFixed()}`} />
               ))}
               <AddSectionForm />
             </Masonry>

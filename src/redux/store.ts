@@ -4,7 +4,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
-import {todoReducer, userReducer, filterReducer} from './reducers';
+import {todoReducer, userReducer, filterReducer, popoverReducer} from './reducers';
 
 // NOTE: for this small app, it would be much more comfortable to use react useContext hook, or react-recoil -> redux is a bit of overkill
 
@@ -19,6 +19,7 @@ const persistedReducer = persistReducer(
     userReducer,
     todoReducer,
     filterReducer,
+    popoverReducer,
   })
 );
 
