@@ -96,7 +96,12 @@ const TodoRow: FC<TodoProps> = ({todo, isDragging, style, index, provided}) => {
       data-testid={todo.id}
       data-index={index}
     >
-      <TodoBox priority={todo.priority} dragging={isDragging} layout={!isDragging}>
+      <TodoBox
+        priority={todo.priority}
+        dragging={isDragging}
+        layout={!isDragging}
+        transition={{type: 'spring', bounce: 0}}
+      >
         <PriorityBorder priority={todo.priority} />
         <Checkbox mx="8px" isChecked={todo.isDone} onChange={handleCheckbox} iconColor="white" />
         <Text {...provided.dragHandleProps} isTruncated flexGrow="1" py="18px">

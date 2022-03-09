@@ -94,12 +94,7 @@ const Section: FC<SectionType> = (section) => {
   );
 
   return (
-    <SectionBox
-      transition={{type: 'spring', bounce: 0}}
-      initial={false}
-      layout
-      key="AnimatedHeight"
-    >
+    <SectionBox transition={{type: 'just'}} initial={false} layout key="AnimatedHeight">
       <motion.div layout>
         <HStack justifyContent="space-between" p="16px">
           <Text fontWeight={500} fontSize="16px">
@@ -110,13 +105,15 @@ const Section: FC<SectionType> = (section) => {
       </motion.div>
 
       {section.items.length >= 1 && (
-        <HStack justifyContent="flex-start">
-          <AnimateSharedLayout key={section.id}>
-            <FilterButton name="all" state={[filter, setFilter]} />
-            <FilterButton name="todo" state={[filter, setFilter]} />
-            <FilterButton name="done" state={[filter, setFilter]} />
-          </AnimateSharedLayout>
-        </HStack>
+        <motion.div layout>
+          <HStack justifyContent="flex-start">
+            <AnimateSharedLayout key={section.id}>
+              <FilterButton name="all" state={[filter, setFilter]} />
+              <FilterButton name="todo" state={[filter, setFilter]} />
+              <FilterButton name="done" state={[filter, setFilter]} />
+            </AnimateSharedLayout>
+          </HStack>
+        </motion.div>
       )}
       <Board items={FilteredItems} sectionId={section.id} filter={filter} />
 
