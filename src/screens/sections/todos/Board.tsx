@@ -118,7 +118,7 @@ const Board: FC<BoardProps> = ({items, sectionId, filter}) => {
         )}
       >
         {(droppableProvided: DroppableProvided) => (
-          <motion.div layout>
+          <motion.div layout transition={{type: 'spring', bounce: 0}}>
             <List
               height={totalHeight}
               rowCount={items.length}
