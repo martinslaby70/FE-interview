@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/FE-interview/static/js/main.a3cd6c11.js",
+    "main.js": "/FE-interview/static/js/main.473d62ea.js",
     "static/js/583.f1c16b90.chunk.js": "/FE-interview/static/js/583.f1c16b90.chunk.js",
     "index.html": "/FE-interview/index.html",
-    "main.a3cd6c11.js.map": "/FE-interview/static/js/main.a3cd6c11.js.map"
+    "main.473d62ea.js.map": "/FE-interview/static/js/main.473d62ea.js.map"
   },
   "entrypoints": [
-    "static/js/main.a3cd6c11.js"
+    "static/js/main.473d62ea.js"
   ]
 }
