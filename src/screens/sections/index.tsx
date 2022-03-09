@@ -97,7 +97,7 @@ const Section: FC<SectionType> = (section) => {
     <SectionBox transition={{type: 'just'}} initial={false} layout key="AnimatedHeight">
       <motion.div layout>
         <HStack justifyContent="space-between" p="16px">
-          <Text fontWeight={500} fontSize="16px">
+          <Text fontWeight={500} fontSize="16px" isTruncated>
             {section.title}
           </Text>
           <CustomizedMenu icon={SubMenuIcon} background="white" items={sectionOptionItems} />
