@@ -21,13 +21,16 @@ const theme = extendTheme({
     },
   },
   components: {
-    Button: {
-      baseStyle: () => ({
-        bg: 'unset',
-        backgroundColor: '#0065FF',
-        color: 'white',
-        borderRadius: '4px',
-      }),
+    Checkbox: {
+      baseStyle: {
+        control: {
+          borderColor: '#6B778C',
+          _checked: {
+            bg: '#0065FF',
+            borderColor: '#0065FF',
+          },
+        },
+      },
     },
   },
 });

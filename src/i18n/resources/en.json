@@ -1,0 +1,58 @@
+{
+  "app": {
+    "title": "Carvago Frontend Assignment",
+    "description": "Assignment in React.js for developers who want to join our team."
+  },
+  "navigation": {
+    "header": "To Do List",
+    "userName": "Full name",
+    "today": "Today"
+  },
+  "buttons": {
+    "save": "Save",
+    "add": "Add",
+    "cancel": "Cancel",
+    "addSection": "Add a section",
+
+    "filters": {
+      "all": "Show all tasks",
+      "done": "View completed tasks",
+      "todo": "View to-do items"
+    },
+    "settings": {
+      "clearAll": "Clear all",
+      "clearDone": "clear all done tasks"
+    }
+  },
+  "section": {
+    "title": "Section title",
+    "editSection": "Edit section",
+    "createdBy": "Created by",
+    "createAt": "Created date",
+    "filter": {
+      "all": "All",
+      "todo": "To do",
+      "done": "Done"
+    },
+    "actions": {
+      "allAsDone": "Mark all as done",
+      "edit": "Edit",
+      "delete": "Delete list"
+    }
+  },
+  "todo": {
+    "addTodo": "Add new task",
+    "delete": "Delete",
+    "edit": "Edit task",
+    "name": "Task name",
+    "description": "Description",
+    "descriptionPlaceholder": "Write a detailed description of the task",
+    "priority": {
+      "header": "Priority",
+      "none": "No priority",
+      "high": "High",
+      "mid": "Medium",
+      "low": "Low"
+    }
+  }
+}

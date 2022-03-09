@@ -9,6 +9,7 @@
  *
  * @see https://styled-components.com/docs/api
  */
+import {SECTION_WIDTH} from 'screens/constants';
 import {createGlobalStyle} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -31,7 +32,6 @@ const GlobalStyle = createGlobalStyle`
      font-size: 100%;
      font: inherit;
      vertical-align: baseline;
-     background-color: #E5E5E5;
      color: #091E42;
    }
    html, body, #root{
@@ -70,6 +70,16 @@ const GlobalStyle = createGlobalStyle`
      font-size: 16px;
      height: 100%;
    }
+
+   .my-masonry-grid {
+    display: flex;
+    width: auto;
+  }
+  .my-masonry-grid_column {
+    max-width: ${SECTION_WIDTH + 16}px;
+    background-clip: padding-box;
+  }
+  
  `;
 
 export default GlobalStyle;

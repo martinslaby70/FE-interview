@@ -1,3 +1,33 @@
+# DEVELOPER NOTES
+
+- I am not sure if updating eslint/i18n config was part of the assignment. I used airBnb lint config that i use in my other projects and commented changes that I added or overrode
+- Using redux is overkill... this project would be much better of with just react `useContext` hook or `react-recoil` as stateManagement.
+  - **possible recoil setup**
+  - atom family for filters (every section filter would be persisted)
+  - separate states for todos and section -> using atom-selectors to pull todos for section
+  - better state project structure (as described [here](https://wes-rast.medium.com/recoil-project-structure-best-practices-79e74a475caa))
+- Using form management packages in this small project also isn't much beneficial. I mainly wanted to show that i can use them.
+- Figma doesn't make sense in some scenarios
+  - I should be displaying preview of a task description, but when opening `Edit task` modal, it displays as a title/task-name ?
+  - Preview of `Edit section modal` ?
+  - it would be cool to give the developer icon source + use only one icon source.
+  - we were said to use chakra, yet the modal looks way to similar to bootstrap modal
+
+### known issues
+
+- displaying popover inside react-virtualized list.
+  - this actually caused many related performance issues, since we cannot just give it a higher `z-index` or disable `overlow: hidden` on the list. so i decided to give the popover space inside the list instead
+    - recalculating rowHeight and listHeight on every popover closing/opening action.
+    - manually updating popover state
+  - sometimes it still overflows a bit
+- framer-motion animations
+  - mainly, the animations can be way better organized, during section height animation, it can hide the `addSection` button, witch changes position instantly.
+  - overall i could spend more time on synchronizing those transition etc. But as i said... its time consuming and this project should be focused on showing my way of thinking and solving logical problems. Not to shock you with flashy animations.
+
+---
+
+---
+
 # Quick Overview
 
 > This repository is built on [Create React App](https://github.com/facebook/create-react-app) with TypeScript configuration
