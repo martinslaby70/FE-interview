@@ -1,4 +1,4 @@
-import {createContext, useContext, FC, useState, ContextType} from 'react';
+import {createContext, useContext, FC, useState} from 'react';
 import {useDisclosure, UseDisclosureReturn} from '@chakra-ui/react';
 import {Section, Todo} from 'redux/types';
 

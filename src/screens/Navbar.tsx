@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
 import {useTranslation} from 'react-i18next';
 
-import {addUserName} from 'redux/actions';
+import {setUser} from 'redux/actions';
 import {useAppDispatch, useAppSelector} from 'redux/store';
 
 import InputList from 'Components/form/InputList';
@@ -55,7 +55,7 @@ const Navbar = () => {
 
   const onSubmit = (data: FormValues) => {
     const currentDate = DateTime.now().toISO();
-    dispatch(addUserName({...data, createdAt: currentDate}));
+    dispatch(setUser({...data, createdAt: currentDate}));
   };
 
   return (

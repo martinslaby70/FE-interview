@@ -1,5 +1,4 @@
 import {FC, useState, useEffect, useCallback} from 'react';
-import {useTranslation} from 'react-i18next';
 import Select from 'react-select';
 import {BaseComboBoxProps, BaseProps, ComboBoxOption, ReadonlyArrayOrItem} from './types';
 

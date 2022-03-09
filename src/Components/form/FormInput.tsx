@@ -1,10 +1,9 @@
 import {Controller} from 'react-hook-form';
-import ReactSelect from 'react-select';
 import {Input, Textarea, Text, Box} from '@chakra-ui/react';
 import styled from 'styled-components';
 
 import {usePartialFormContext} from './contexts/partialForm';
-import {BaseComboBoxProps, ComboBoxOption, FormInputProps} from './types';
+import {BaseComboBoxProps, FormInputProps} from './types';
 import Combobox from './Combobox';
 
 const StyledInput = styled(Input)`
