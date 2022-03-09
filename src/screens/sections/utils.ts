@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Priority} from 'redux/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ItemWithId = {id: string} & Record<string, any>;
+export type ItemWithId = {id: string | number} & Record<string, any>;
 
 export const reorder = <I extends ItemWithId>(
   list: I[],
@@ -17,8 +17,8 @@ export const reorder = <I extends ItemWithId>(
   return result;
 };
 
-export const GetPrioColor = (prio: Priority) => {
-  switch (prio) {
+export const GetPriorityColor = (priority: Priority) => {
+  switch (priority) {
     case Priority.none:
       return 'transparent';
     case Priority.high:
@@ -49,7 +49,3 @@ export const useSubHeaderText = (
 };
 
 /* eslint-enable @typescript-eslint/restrict-template-expressions */
-
-export const ROW_HEIGHT = 52;
-export const MAX_ROWS = 8;
-export const ROW_GAP = 8;

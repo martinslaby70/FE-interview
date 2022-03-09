@@ -9,7 +9,7 @@
  *
  * @see https://styled-components.com/docs/api
  */
-import {SECTION_WIDTH} from 'screens/shared/constants';
+import {SECTION_WIDTH} from 'screens/constants';
 import {createGlobalStyle} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`

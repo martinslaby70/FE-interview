@@ -10,7 +10,7 @@ import {useAppDispatch, useAppSelector} from 'redux/store';
 import InputList from 'Components/form/InputList';
 import FormInput from 'Components/form/FormInput';
 import FormSubmitButton from 'Components/buttons/FormSubmitButton';
-import {NAVBAR_HEIGHT} from './shared/constants';
+import {NAVBAR_HEIGHT} from './constants';
 
 const NavbarBox = styled.div`
   background-color: #fff;

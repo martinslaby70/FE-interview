@@ -1,29 +1,35 @@
-import {DeleteIcon, EditIcon} from '@chakra-ui/icons';
-import {Box, Checkbox, Text} from '@chakra-ui/react';
-import CustomizedMenu, {MenuItemType} from 'Components/Menu';
 import {FC, memo} from 'react';
 import {DraggableProvided} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
+import {DeleteIcon, EditIcon} from '@chakra-ui/icons';
+import {Box, Checkbox, Text} from '@chakra-ui/react';
+import styled, {CSSProperties} from 'styled-components';
+import {motion} from 'framer-motion';
+
 import {removeToDo, toggleTodoStatus} from 'redux/actions';
 import {useAppDispatch} from 'redux/store';
 import {Priority, Todo} from 'redux/types';
+
+import CustomizedMenu, {MenuItemType} from 'Components/Menu';
+
+import {ROW_GAP, ROW_HEIGHT} from 'screens/constants';
 import {useModalContext} from 'screens/modals/ModalContextProvider';
-import styled, {CSSProperties} from 'styled-components';
-import {ROW_GAP, ROW_HEIGHT, GetPrioColor} from '../utils';
+
+import {GetPriorityColor} from '../utils';
 
 type TodoProps = {
   provided: DraggableProvided;
   todo: Todo;
-  isDragging: boolean;
   style: CSSProperties;
   index: number;
+  isDragging: boolean;
 };
 
 const TodoBoxWrapper = styled.div`
   height: ${ROW_HEIGHT + ROW_GAP}px;
 `;
 
-const TodoBox = styled.div<{priority: Priority; dragging: boolean}>`
+const TodoBox = styled(motion.div)<{priority: Priority; dragging: boolean}>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -32,7 +38,7 @@ const TodoBox = styled.div<{priority: Priority; dragging: boolean}>`
   height: ${ROW_HEIGHT}px;
   border: 1px solid #dfe1e6;
   border-left: 1px solid
-    ${(p) => (p.priority !== Priority.none ? GetPrioColor(p.priority) : '#dfe1e6')};
+    ${(p) => (p.priority !== Priority.none ? GetPriorityColor(p.priority) : '#dfe1e6')};
   margin: ${ROW_GAP / 2}px 8px ${ROW_GAP / 2}px 8px;
   overflow: hidden;
 `;
@@ -40,7 +46,7 @@ const TodoBox = styled.div<{priority: Priority; dragging: boolean}>`
 const PriorityBorder = styled.div<{priority: Priority}>`
   height: 100%;
   width: 3px;
-  background-color: ${(p) => GetPrioColor(p.priority)};
+  background-color: ${(p) => GetPriorityColor(p.priority)};
 `;
 
 export const SubMenuIcon = (
@@ -90,7 +96,7 @@ const TodoRow: FC<TodoProps> = ({todo, isDragging, style, index, provided}) => {
       data-testid={todo.id}
       data-index={index}
     >
-      <TodoBox priority={todo.priority} dragging={isDragging}>
+      <TodoBox priority={todo.priority} dragging={isDragging} layout={!isDragging}>
         <PriorityBorder priority={todo.priority} />
         <Checkbox mx="8px" isChecked={todo.isDone} onChange={handleCheckbox} iconColor="white" />
         <Text {...provided.dragHandleProps} isTruncated flexGrow="1" py="18px">

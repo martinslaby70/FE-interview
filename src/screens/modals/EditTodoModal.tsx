@@ -1,9 +1,7 @@
 import {useTranslation} from 'react-i18next';
 import {FC, useEffect, useMemo} from 'react';
 import {StylesConfig} from 'react-select';
-
 import {useForm} from 'react-hook-form';
-
 import {
   Modal,
   ModalOverlay,
@@ -24,7 +22,7 @@ import {Text as ButtonText} from 'Components/buttons/utils';
 
 import {useAppDispatch, useAppSelector} from 'redux/store';
 import {Priority, updateTodo} from 'redux/actions';
-import {useSubHeaderText} from '../sections/utils';
+import {GetPriorityColor, useSubHeaderText} from '../sections/utils';
 import {useModalContext} from './ModalContextProvider';
 
 type FormValues = {
@@ -87,9 +85,9 @@ const EditTodoModal: FC = () => {
 
   const options = useMemo(
     () => [
-      {id: Priority.low, color: '#24A148', title: t('todo.priority.low')},
-      {id: Priority.mid, color: '#FF9800', title: t('todo.priority.mid')},
-      {id: Priority.high, color: '#E32C1E', title: t('todo.priority.high')},
+      {id: Priority.low, color: GetPriorityColor(Priority.low), title: t('todo.priority.low')},
+      {id: Priority.mid, color: GetPriorityColor(Priority.mid), title: t('todo.priority.mid')},
+      {id: Priority.high, color: GetPriorityColor(Priority.high), title: t('todo.priority.high')},
     ],
     [t]
   );

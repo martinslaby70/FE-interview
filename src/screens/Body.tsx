@@ -6,7 +6,7 @@ import Masonry from 'react-masonry-css';
 import {useAppSelector} from 'redux/store';
 
 import AddSectionForm from './shared/AddSectionForm';
-import {NAVBAR_HEIGHT} from './shared/constants';
+import {NAVBAR_HEIGHT, SECTION_BREAKPOINTS} from './constants';
 import Filter from './Filters';
 import Section from './sections';
 import {ModalContextProvider} from './modals/ModalContextProvider';
@@ -31,14 +31,6 @@ const Sections = () => {
   const user = useAppSelector((item) => item.userReducer);
   const sections = useAppSelector((item) => item.todoReducer);
 
-  const breakpointColumnsObj = {
-    default: 5,
-    1800: 4,
-    1440: 3,
-    1100: 2,
-    730: 1,
-  };
-
   return (
     <BodyWrapper>
       <AnimatePresence key="loadingPresence">
@@ -50,7 +42,7 @@ const Sections = () => {
             <ModalContextProvider>
               <motion.div layout key="Sections">
                 <Masonry
-                  breakpointCols={breakpointColumnsObj}
+                  breakpointCols={SECTION_BREAKPOINTS}
                   className="my-masonry-grid"
                   columnClassName="my-masonry-grid_column"
                 >

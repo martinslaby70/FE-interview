@@ -14,7 +14,7 @@ import FormSubmitButton from 'Components/buttons/FormSubmitButton';
 import FormInput from 'Components/form/FormInput';
 import InputList from 'Components/form/InputList';
 
-import {SECTION_WIDTH} from './constants';
+import {SECTION_WIDTH} from '../constants';
 
 type FormValues = {title: string};
 
@@ -71,7 +71,7 @@ const AddSectionForm = () => {
             <motion.div {...transitionProps} key="form">
               <InputList {...methods}>
                 <FormInput name="title" variant="text" title={t('section.title')} />
-                <HStack direction="row-reverse" w="100%" justify="flex-end">
+                <HStack direction="row-reverse" w="100%" mt="8px" justify="flex-end">
                   <CancelButton onClick={() => setShowButton(true)}>
                     {t('buttons.cancel')}
                   </CancelButton>

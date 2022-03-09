@@ -13,10 +13,10 @@ import {invalidateFilter} from 'redux/actions/filter';
 import FilterButton from 'Components/buttons/FilterButton';
 import CustomizedMenu, {MenuItemType} from 'Components/Menu';
 
-import {SECTION_WIDTH} from 'screens/shared/constants';
+import {SECTION_WIDTH} from 'screens/constants';
 import {useModalContext} from 'screens/modals/ModalContextProvider';
 
-import AddTodoForm from './AddTodoForm';
+import AddTodoForm from '../shared/AddTodoForm';
 import Board from './todos/Board';
 import {SubMenuIcon} from './todos/Todo';
 

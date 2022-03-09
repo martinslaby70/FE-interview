@@ -1,11 +1,11 @@
 import type {Props, StylesConfig} from 'react-select';
+import {ItemWithId} from 'screens/sections/utils';
 
-export type Variant = 'Combobox' | 'text' | 'textarea';
+export type Variant = 'ComboBox' | 'text' | 'textarea';
 
 type Empty = Record<string, unknown>;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ComboBoxOption = {id: number; label: string; [key: string]: any};
+export type ComboBoxOption = ItemWithId;
 
 export type BaseProps = Props<ComboBoxOption, boolean>;
 

@@ -9,17 +9,19 @@ import {
   DroppableProvided,
   Draggable,
 } from 'react-beautiful-dnd';
+import {motion} from 'framer-motion';
 import ReactDOM from 'react-dom';
-
+import {CSSProperties} from 'styled-components';
 import {List, Index} from 'react-virtualized';
 
 import {updateSection} from 'redux/actions';
 import {useAppDispatch, useAppSelector} from 'redux/store';
 import {FilterType, Todo} from 'redux/types';
-import {SECTION_WIDTH} from 'screens/shared/constants';
-import {CSSProperties} from 'styled-components';
+
+import {MAX_ROWS, ROW_HEIGHT, SECTION_WIDTH, ROW_GAP} from 'screens/constants';
 import TodoRow from './Todo';
-import {MAX_ROWS, reorder, ROW_GAP, ROW_HEIGHT} from '../utils';
+
+import {reorder} from '../utils';
 
 type BoardProps = {items: Todo[]; sectionId: string; filter: FilterType};
 
@@ -39,9 +41,9 @@ const getRowRender =
           <TodoRow
             provided={provided}
             todo={todo}
-            isDragging={snapshot.isDragging}
             style={{margin: 0, ...style}}
             index={index}
+            isDragging={snapshot.isDragging}
           />
         )}
       </Draggable>
@@ -70,7 +72,7 @@ const Board: FC<BoardProps> = ({items, sectionId, filter}) => {
 
   // HACK: this is not a good solution, currently iam saving popover status inside redux state, and recalculating height
   // on every opening witch is bad on performance. This hacky solution solves issue with displaying popovers inside virtualized lists
-  // there should be a better way to do this, but thats way over my time-budget.
+  // there should be a better way to do this, but dealing with that is way over time-budget.
 
   const getRowHeight = useCallback(
     ({index}: Index) => {
@@ -116,25 +118,27 @@ const Board: FC<BoardProps> = ({items, sectionId, filter}) => {
         )}
       >
         {(droppableProvided: DroppableProvided) => (
-          <List
-            height={totalHeight}
-            rowCount={items.length}
-            rowHeight={popover ? getRowHeight : ROW_HEIGHT + ROW_GAP}
-            width={SECTION_WIDTH}
-            autoWidth
-            style={{marginTop: '10px'}}
-            ref={(ref) => {
-              if (ref) {
-                // react-virtualized has no way to get the list's ref.
-                // eslint-disable-next-line react/no-find-dom-node
-                const whatHasMyLifeComeTo = ReactDOM.findDOMNode(ref);
-                if (whatHasMyLifeComeTo instanceof HTMLElement) {
-                  droppableProvided.innerRef(whatHasMyLifeComeTo);
+          <motion.div layout>
+            <List
+              height={totalHeight}
+              rowCount={items.length}
+              rowHeight={popover ? getRowHeight : ROW_HEIGHT + ROW_GAP}
+              width={SECTION_WIDTH}
+              autoWidth
+              style={{marginTop: '10px'}}
+              ref={(ref) => {
+                if (ref) {
+                  // react-virtualized has no way to get the list's ref.
+                  // eslint-disable-next-line react/no-find-dom-node
+                  const whatHasMyLifeComeTo = ReactDOM.findDOMNode(ref);
+                  if (whatHasMyLifeComeTo instanceof HTMLElement) {
+                    droppableProvided.innerRef(whatHasMyLifeComeTo);
+                  }
                 }
-              }
-            }}
-            rowRenderer={getRowRender(items, disableDnD)}
-          />
+              }}
+              rowRenderer={getRowRender(items, disableDnD)}
+            />
+          </motion.div>
         )}
       </Droppable>
     </DragDropContext>
