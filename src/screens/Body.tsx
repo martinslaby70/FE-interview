@@ -9,6 +9,9 @@ import AddSectionForm from './shared/AddSectionForm';
 import {NAVBAR_HEIGHT} from './shared/constants';
 import Filter from './Filters';
 import Section from './sections';
+import {ModalContextProvider} from './modals/ModalContextProvider';
+import EditSectionModal from './modals/EditSectionModal';
+import EditTodoModal from './modals/EditTodoModal';
 
 const BodyWrapper = styled.div`
   width: 100%
@@ -44,18 +47,23 @@ const Sections = () => {
         ) : (
           <>
             <Filter />
-            <motion.div layout key="Sections">
-              <Masonry
-                breakpointCols={breakpointColumnsObj}
-                className="my-masonry-grid"
-                columnClassName="my-masonry-grid_column"
-              >
-                {sections.map((item, i) => (
-                  <Section {...item} key={`section-${i.toFixed()}`} />
-                ))}
-                <AddSectionForm />
-              </Masonry>
-            </motion.div>
+            <ModalContextProvider>
+              <motion.div layout key="Sections">
+                <Masonry
+                  breakpointCols={breakpointColumnsObj}
+                  className="my-masonry-grid"
+                  columnClassName="my-masonry-grid_column"
+                >
+                  {sections.map((item, i) => (
+                    <Section {...item} key={`section-${i.toFixed()}`} />
+                  ))}
+
+                  <AddSectionForm />
+                </Masonry>
+              </motion.div>
+              <EditSectionModal />
+              <EditTodoModal />
+            </ModalContextProvider>
           </>
         )}
       </AnimatePresence>

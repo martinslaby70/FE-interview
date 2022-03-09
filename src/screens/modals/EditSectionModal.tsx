@@ -1,5 +1,5 @@
 import {useTranslation} from 'react-i18next';
-import {FC, useEffect, useMemo} from 'react';
+import {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 
 import {
@@ -19,17 +19,23 @@ import FormInput from 'Components/form/FormInput';
 import FormSubmitButton from 'Components/buttons/FormSubmitButton';
 import {Text as ButtonText} from 'Components/buttons/utils';
 
-import {Section} from 'redux/types';
+import {useSubHeaderText} from 'screens/sections/utils';
 import {useAppDispatch, useAppSelector} from 'redux/store';
 import {updateSection} from 'redux/actions';
-import {DateTime} from 'luxon';
-
-// ideally we want to pass only the ID and fetch the section
-type EditSectionModalProps = {isOpen: boolean; toggle: () => void; section: Section};
+import {useModalContext} from './ModalContextProvider';
 
 type FormValues = {title: string};
 
-const EditSectionModal: FC<EditSectionModalProps> = ({isOpen, toggle, section}) => {
+const EditSectionModal = () => {
+  const {
+    sectionState: {isOpen, onToggle, section, setSection},
+  } = useModalContext();
+
+  const toggle = () => {
+    setSection(null);
+    onToggle();
+  };
+
   const {t} = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -42,26 +48,17 @@ const EditSectionModal: FC<EditSectionModalProps> = ({isOpen, toggle, section}) 
   const {handleSubmit, formState, reset} = methods;
 
   useEffect(() => {
-    if (isOpen) reset({title: section.title});
-  }, [isOpen, reset, section.title]);
+    if (isOpen && section) reset({title: section.title});
+  }, [isOpen, reset, section]);
 
   const onSubmit = (data: FormValues) => {
+    if (!section) return;
+
     dispatch(updateSection({id: section.id, title: data.title}));
     toggle();
   };
 
-  // eslint sees `t("")` as an object
-  /* eslint-disable @typescript-eslint/restrict-template-expressions */
-  const SubheaderText = useMemo(
-    () =>
-      `${t('section.createdBy')}: ${user?.fullName ?? ''} · ${t(
-        'section.createAt'
-      )}: ${DateTime.fromISO(section.createdAt).toFormat('dd/MM/yyyy')} · ${DateTime.fromISO(
-        section.createdAt
-      ).toFormat('HH:mm')}`,
-    [section.createdAt, t, user?.fullName]
-  );
-  /* eslint-enable @typescript-eslint/restrict-template-expressions */
+  const subheaderText = useSubHeaderText(user?.fullName, section?.createdAt);
 
   return (
     <Modal onClose={toggle} size="xl" isOpen={isOpen} autoFocus={false}>
@@ -75,7 +72,7 @@ const EditSectionModal: FC<EditSectionModalProps> = ({isOpen, toggle, section}) 
         <ModalCloseButton />
         <ModalBody>
           <Text fontSize="14px" color="#7A869A" letterSpacing="0.16px" mt="5px" mb="16px">
-            {SubheaderText}
+            {subheaderText}
           </Text>
           <InputList {...methods}>
             <FormInput name="title" variant="text" title={t('section.title')} required />

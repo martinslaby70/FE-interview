@@ -1,23 +1,24 @@
-import {Text, HStack, useDisclosure} from '@chakra-ui/react';
+import {Text, HStack} from '@chakra-ui/react';
 import {CheckIcon, DeleteIcon, EditIcon} from '@chakra-ui/icons';
 import {FC, useCallback, useEffect, useMemo, useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import styled from 'styled-components';
 import {AnimateSharedLayout, motion} from 'framer-motion';
 
 import {useAppSelector, useAppDispatch} from 'redux/store';
 import {FilterType, Section as SectionType, Todo} from 'redux/types';
+import {markAllTodosAsDone, removeSection} from 'redux/actions';
+import {invalidateFilter} from 'redux/actions/filter';
 
 import FilterButton from 'Components/buttons/FilterButton';
 import CustomizedMenu, {MenuItemType} from 'Components/Menu';
 
 import {SECTION_WIDTH} from 'screens/shared/constants';
-import {markAllTodosAsDone, removeSection} from 'redux/actions';
-import {useTranslation} from 'react-i18next';
-import {invalidateFilter} from 'redux/actions/filter';
+import {useModalContext} from 'screens/modals/ModalContextProvider';
+
 import AddTodoForm from './AddTodoForm';
 import Board from './todos/Board';
 import {SubMenuIcon} from './todos/Todo';
-import EditSectionModal from './EditSectionModal';
 
 const SectionBox = styled(motion.div)`
   width: ${SECTION_WIDTH}px;
@@ -34,7 +35,14 @@ const Section: FC<SectionType> = (section) => {
   const globalFilter = useAppSelector((state) => state.filterReducer);
   const [filter, setFilter] = useState<FilterType>('all');
 
-  const {isOpen, onToggle} = useDisclosure();
+  const {
+    sectionState: {setSection, onToggle},
+  } = useModalContext();
+
+  const handleToggle = () => {
+    setSection(section);
+    onToggle();
+  };
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -53,7 +61,7 @@ const Section: FC<SectionType> = (section) => {
     {
       icon: <EditIcon w="3" h="3" mr="15px" />,
       title: t('section.actions.edit'),
-      onClick: onToggle,
+      onClick: handleToggle,
     },
     {
       icon: <DeleteIcon color="priority.high" w="3" h="3" mr="15px" />,
@@ -113,8 +121,6 @@ const Section: FC<SectionType> = (section) => {
       <Board items={FilteredItems} sectionId={section.id} filter={filter} />
 
       <AddTodoForm sectionId={section.id} />
-
-      <EditSectionModal isOpen={isOpen} toggle={onToggle} section={section} />
     </SectionBox>
   );
 };

@@ -26,7 +26,7 @@ export interface RemoveTodoAction {
   payload: TodoIdentification;
 }
 
-type updateTodoPayload = {id: string} & Partial<TodoPayload>;
+type updateTodoPayload = {id: string; sectionId: string} & Partial<TodoPayload>;
 export interface updateTodoAction {
   type: ActionTypes.updateTodo;
   payload: updateTodoPayload;

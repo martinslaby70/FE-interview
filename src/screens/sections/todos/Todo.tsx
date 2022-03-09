@@ -7,8 +7,9 @@ import {useTranslation} from 'react-i18next';
 import {removeToDo, toggleTodoStatus} from 'redux/actions';
 import {useAppDispatch} from 'redux/store';
 import {Priority, Todo} from 'redux/types';
+import {useModalContext} from 'screens/modals/ModalContextProvider';
 import styled, {CSSProperties} from 'styled-components';
-import {ROW_GAP, ROW_HEIGHT, GetPrioColor} from './utils';
+import {ROW_GAP, ROW_HEIGHT, GetPrioColor} from '../utils';
 
 type TodoProps = {
   provided: DraggableProvided;
@@ -52,9 +53,18 @@ const TodoRow: FC<TodoProps> = ({todo, isDragging, style, index, provided}) => {
   const {t} = useTranslation();
   const dispatch = useAppDispatch();
 
-  const {id, sectionId} = todo;
+  const {
+    todoState: {setTodo, onToggle},
+  } = useModalContext();
 
   const handleToggle = () => {
+    setTodo(todo);
+    onToggle();
+  };
+
+  const {id, sectionId} = todo;
+
+  const handleCheckbox = () => {
     dispatch(toggleTodoStatus({id, sectionId}));
   };
 
@@ -67,7 +77,7 @@ const TodoRow: FC<TodoProps> = ({todo, isDragging, style, index, provided}) => {
     {
       icon: <EditIcon w="3" h="3" mr="15px" />,
       title: t('todo.edit'),
-      onClick: () => {},
+      onClick: handleToggle,
     },
   ];
 
@@ -82,7 +92,7 @@ const TodoRow: FC<TodoProps> = ({todo, isDragging, style, index, provided}) => {
     >
       <TodoBox priority={todo.priority} dragging={isDragging}>
         <PriorityBorder priority={todo.priority} />
-        <Checkbox mx="8px" isChecked={todo.isDone} onChange={handleToggle} iconColor="white" />
+        <Checkbox mx="8px" isChecked={todo.isDone} onChange={handleCheckbox} iconColor="white" />
         <Text {...provided.dragHandleProps} isTruncated flexGrow="1" py="18px">
           {todo.title}
         </Text>

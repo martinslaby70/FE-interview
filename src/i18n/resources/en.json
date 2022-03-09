@@ -43,6 +43,16 @@
   "todo": {
     "addTodo": "Add new task",
     "delete": "Delete",
-    "edit": "Edit task"
+    "edit": "Edit task",
+    "name": "Task name",
+    "description": "Description",
+    "descriptionPlaceholder": "Write a detailed description of the task",
+    "priority": {
+      "header": "Priority",
+      "none": "No priority",
+      "high": "High",
+      "mid": "Medium",
+      "low": "Low"
+    }
   }
 }

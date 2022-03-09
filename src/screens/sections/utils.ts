@@ -1,7 +1,9 @@
+import {DateTime} from 'luxon';
+import {useTranslation} from 'react-i18next';
 import {Priority} from 'redux/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ItemWithId = {id: string} & Record<string, any>;
+export type ItemWithId = {id: string} & Record<string, any>;
 
 export const reorder = <I extends ItemWithId>(
   list: I[],
@@ -29,6 +31,24 @@ export const GetPrioColor = (prio: Priority) => {
       throw new Error('unknown priority type');
   }
 };
+
+// eslint sees `t("")` as an object
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+export const useSubHeaderText = (
+  name: string | null | undefined,
+  createdAt: string | undefined | null
+) => {
+  const date = createdAt ? DateTime.fromISO(createdAt) : null;
+  const {t} = useTranslation();
+
+  if (!(name && date?.isValid)) return '';
+
+  return `${t('section.createdBy')}: ${name} · ${t('section.createAt')}: ${date.toFormat(
+    'dd/MM/yyyy'
+  )} · ${date.toFormat('HH:mm')}`;
+};
+
+/* eslint-enable @typescript-eslint/restrict-template-expressions */
 
 export const ROW_HEIGHT = 52;
 export const MAX_ROWS = 8;

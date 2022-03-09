@@ -1,23 +1,18 @@
 import {Controller} from 'react-hook-form';
 import ReactSelect from 'react-select';
-import {Input, Textarea, Text} from '@chakra-ui/react';
+import {Input, Textarea, Text, Box} from '@chakra-ui/react';
 import styled from 'styled-components';
 
 import {usePartialFormContext} from './contexts/partialForm';
-import {FormInputProps} from './types';
+import {BaseComboBoxProps, ComboBoxOption, FormInputProps} from './types';
+import Combobox from './Combobox';
 
-const StyledInput = styled(Input)<{displayMargin?: boolean}>`
+const StyledInput = styled(Input)`
   height: 32px !important;
   background-color: white !important;
   border: 1px solid #b3bac5 !important;
   box-sizing: border-box;
   border-radius: 4px !important;
-  ${(p) =>
-    p.displayMargin &&
-    `
-  margin-top: 4px;
-  margin-bottom: 11px;
-  `}
 `;
 
 const InputTitle = styled.span`
@@ -28,24 +23,33 @@ const InputTitle = styled.span`
   letter-spacing: 0em;
   text-align: left;
   color: #42526e;
+  margin-bottom: 5px;
 `;
+
+// for total of 3 input variants, i just shoved them into one file, but later on, it should be
+// divided between controlled and uncontrolled with each having `transform props` hook.
 
 const FormInput = (props: FormInputProps) => {
   const {control, register} = usePartialFormContext();
   const {name, required, variant} = props;
 
-  if (variant === 'Combobox')
+  if (variant === 'ComboBox')
     return (
       <Controller
         render={({field: {ref: __, ...inputProps}, fieldState}) => (
-          <>
-            <ReactSelect {...props} {...inputProps} />
+          <Box mt="16px">
+            {props.title && (
+              <Box mb="5px">
+                <InputTitle>{props.title}</InputTitle>
+              </Box>
+            )}
+            <Combobox {...(props as BaseComboBoxProps)} {...inputProps} />
             {fieldState.error && (
               <Text fontSize="xs" color="red">
                 {fieldState.error.message}
               </Text>
             )}
-          </>
+          </Box>
         )}
         rules={{
           required,
@@ -54,11 +58,14 @@ const FormInput = (props: FormInputProps) => {
         name={name}
       />
     );
-
   if (variant === 'text')
     return (
       <>
-        {props.title && <InputTitle>{props.title}</InputTitle>}
+        {props.title && (
+          <Box mb="5px" mt="16px">
+            <InputTitle>{props.title}</InputTitle>
+          </Box>
+        )}
         <StyledInput
           placeholder={props.placeholder}
           displayMargin={!!props.title}
@@ -68,7 +75,14 @@ const FormInput = (props: FormInputProps) => {
     );
 
   if (variant === 'textarea')
-    return <Textarea placeholder={props.placeholder} {...register(name, {required})} />;
+    return (
+      <Textarea
+        mt="16px"
+        placeholder={props.placeholder}
+        borderColor="#B3BAC5"
+        {...register(name, {required})}
+      />
+    );
 
   return null;
 };

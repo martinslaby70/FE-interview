@@ -19,7 +19,7 @@ import {FilterType, Todo} from 'redux/types';
 import {SECTION_WIDTH} from 'screens/shared/constants';
 import {CSSProperties} from 'styled-components';
 import TodoRow from './Todo';
-import {MAX_ROWS, reorder, ROW_GAP, ROW_HEIGHT} from './utils';
+import {MAX_ROWS, reorder, ROW_GAP, ROW_HEIGHT} from '../utils';
 
 type BoardProps = {items: Todo[]; sectionId: string; filter: FilterType};
 

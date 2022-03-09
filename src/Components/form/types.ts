@@ -1,31 +1,32 @@
-import type {Props as SelectProps} from 'react-select';
+import type {Props, StylesConfig} from 'react-select';
 
 export type Variant = 'Combobox' | 'text' | 'textarea';
 
 type Empty = Record<string, unknown>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ComboboxOption = {id: string; [key: string]: any};
+export type ComboBoxOption = {id: number; label: string; [key: string]: any};
 
-export type BaseProps = SelectProps<ComboboxOption, boolean>;
+export type BaseProps = Props<ComboBoxOption, boolean>;
 
-export type BaseComboboxProps = {
+export type BaseComboBoxProps = {
   value: number;
   defaultValue?: number;
   onChange: (id: number | null) => void;
   placeholder: string;
   textField: string;
-  options: ComboboxOption[] | undefined;
+  options: ComboBoxOption[] | undefined;
+  styles: StylesConfig<ComboBoxOption>;
 } & Pick<BaseProps, 'isClearable' | 'isSearchable' | 'isDisabled' | 'className'>;
 
-type ComboboxProps = Omit<
-  BaseComboboxProps,
+type ComboBoxProps = Omit<
+  BaseComboBoxProps,
   'valueField' | 'value' | 'onChange' | 'placeholder' | 'isMulti' | 'isDisabled'
 > &
-  Partial<BaseComboboxProps>;
+  Partial<BaseComboBoxProps>;
 
 export type VariantInputMap = {
-  Combobox: ComboboxProps;
+  ComboBox: ComboBoxProps;
   text: Empty;
   textarea: Empty;
 };
@@ -47,3 +48,5 @@ export type FormInputProps = {
       defaultValue?: VariantInputMap[V]['defaultValue'] | null;
     };
 }[keyof VariantInputMap];
+
+export type ReadonlyArrayOrItem<A> = readonly A[] | A;
